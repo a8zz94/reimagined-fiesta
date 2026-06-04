@@ -4,12 +4,12 @@ from src.engine.predictor import expected_goals, simulate_match, match_probabili
 
 
 def test_expected_goals_stronger_team_scores_more():
-    la, lb = expected_goals("ARG", "IDN")
-    assert la > lb, "Argentina should outscore Indonesia on average"
+    la, lb = expected_goals("ARG", "CUW")  # Argentina vs Curaçao
+    assert la > lb, "Argentina should outscore Curaçao on average"
 
 
 def test_expected_goals_are_positive():
-    for pair in [("ARG", "FRA"), ("BRA", "ENG"), ("IDN", "NZL")]:
+    for pair in [("ARG", "FRA"), ("BRA", "ENG"), ("CUW", "NZL")]:
         la, lb = expected_goals(*pair)
         assert la > 0 and lb > 0
 
@@ -39,5 +39,5 @@ def test_match_probabilities_sum_to_one():
 
 
 def test_stronger_team_higher_win_probability():
-    mp = match_probabilities("ARG", "IDN", n=20_000)
+    mp = match_probabilities("ARG", "CUW", n=20_000)
     assert mp["win_a"] > mp["win_b"]
